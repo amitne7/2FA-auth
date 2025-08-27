@@ -3,17 +3,13 @@ package auth.android.app.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by sudhirharit on 28/03/18.
- */
-
 public class PrefsUtil {
 
 
     /**
      * Name of the preference file
      */
-    private static final String APP_PREFS = "msvc_preferences";
+    private static final String APP_PREFS = "auth_preferences";
 
     private Context mContext;
     private SharedPreferences mSharedPreferences;

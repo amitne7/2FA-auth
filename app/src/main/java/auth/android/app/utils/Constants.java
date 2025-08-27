@@ -3,8 +3,7 @@ package auth.android.app.utils;
 public class Constants {
 
     //API End point
-//    public static final String BASE_URL = "http://192.168.0.19/authenticator/api/";
-    public static final String BASE_URL = "http://172.20.10.2/authenticator/api/";
+    public static final String BASE_URL = "YOUR_API_DOMAIN";
     //Fonts
 
     public static final String TYPEFACE_BOLD = "fonts/AvenirNextLTPro-Bold.otf";
