@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Authenticator</string>
+
+    <string name="que_desc">For any question related to the conference, please write to us here</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_to">Welcome to Authenticator</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="upload_photo">Upload \nPhoto<![CDATA[<font color=#FF0000>*</font>]]></string>
+    <string name="txt_error_invalid_mobile_number">Please enter 10 digit mobile number</string>
+    <string name="txt_error_invalid_otp">Please enter valid otp</string>
+    <string name="txt_error_internet_connection">Internet connection not available</string>
+    <string name="txt_error_network">Network error occurred, please try again later!</string>
+</resources>
