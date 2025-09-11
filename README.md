@@ -46,9 +46,75 @@ This project proposes a **location-aware mobile 2FA application** that verifies 
 
 ---
 
-## Installation  
-
-1. **Clone the repository:**  
+## How to Import the Project
+1. Clone the repository:
    ```bash
-   git clone https://github.com/amitne7/auth-web.git;
-   cd auth-web
+   git clone https://github.com/amitne7/2FA-auth;
+   cd 2FA-auth;
+   ```
+
+2. Open **Android Studio**.  
+   - Select **File > Open**  
+   - Navigate to the cloned repository folder and select it.  
+
+3. Let Android Studio **sync Gradle** and download all dependencies.  
+
+  ## Running on Emulator
+
+1. Open **Device Manager** in Android Studio:  
+   - Click on **Tools > Device Manager**.  
+   - Create a new Virtual Device (e.g., Pixel 6, Android 12).  
+   - Download the required **System Image** (if not already installed).  
+
+2. Select the emulator and **click Run** to launch it.  
+
+3. Run the app:  
+   - Click the green **Run button** in Android Studio.  
+   - Choose the emulator device from the list.  
+   - The app will be built, installed, and launched inside the emulator.  
+
+---
+
+## Running on a Real Device
+
+1. Enable **Developer Options** on your phone(these steps can be vary on device to device):  
+   - Go to **Settings > About phone**.  
+   - Tap **Build number** 7 times until "Developer Mode" is enabled.  
+
+2. Enable **USB Debugging**:  
+   - Go to **Settings > Developer options**.  
+   - Turn on **USB debugging**.  
+
+3. Connect your phone to your computer via USB.  
+   - You may need to install your device’s USB drivers.  
+
+4. Verify that the device is detected:  
+
+   ```bash
+   adb devices
+   ```
+
+   You should see your device listed.
+
+## Quick Start (CLI)
+
+For advanced users who prefer command-line execution:  
+```bash
+# 1. Clone the repository:
+   git clone https://github.com/amitne7/2FA-auth;
+   cd 2FA-auth;
+
+# 2. Build the project (assemble debug APK)
+./gradlew assembleDebug
+
+# 3. Install the APK on a connected device/emulator
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+
+# 4. Run unit tests
+./gradlew test
+
+# 5. Run instrumentation tests on emulator/real device
+./gradlew connectedAndroidTest
+```
+
+
