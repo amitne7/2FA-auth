@@ -1,7 +1,7 @@
 package auth.android.app.core.common;
 
-import auth.android.app.request.common.PageDataRequest;
-import auth.android.app.responsemodel.common.PageDataResponse;
+import auth.android.app.request.FcmTokenRequest;
+import auth.android.app.responsemodel.GeneralResponse;
 
 public class CommonPresenter implements CommonContractor.Presenter {
     CommonContractor.View mView;
@@ -13,12 +13,12 @@ public class CommonPresenter implements CommonContractor.Presenter {
     }
 
     @Override
-    public void onPageResponse(PageDataResponse response) {
-        mView.onPageResponse(response);
+    public void updateFcmTokenResponse(GeneralResponse response) {
+        mView.updateFcmTokenResponse(response);
     }
 
     @Override
-    public void pageRequest(PageDataRequest request) {
-        commonInteractor.pageRequest(request);
+    public void fcmRequest(FcmTokenRequest request) {
+        commonInteractor.fcmRequest(request);
     }
 }

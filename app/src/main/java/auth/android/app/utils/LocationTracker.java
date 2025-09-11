@@ -1,10 +1,10 @@
 package auth.android.app.utils;
 
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,8 +41,6 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Date;
 
-import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
-
 /**
  * Created by amitkumar on 20/06/2024.
  */
@@ -53,14 +51,6 @@ public class LocationTracker extends Service implements com.google.android.gms.l
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
 
-    private static final long ONE_MIN = 1000 * 60;
-    private static final long TWO_MIN = ONE_MIN * 2;
-    private static final long FIVE_MIN = ONE_MIN * 5;
-    private static final long POLLING_FREQ = 1000 * 30;
-    private static final long FASTEST_UPDATE_FREQ = 1000 * 5;
-    private static final float MIN_ACCURACY = 25.0f;
-    private static final float MIN_LAST_READ_ACCURACY = 500.0f;
-    private static final int REQUEST_CHECK_SETTINGS = 0102;
     private Context context;
     private double latitude;
     private double longitude;
@@ -69,12 +59,9 @@ public class LocationTracker extends Service implements com.google.android.gms.l
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
-    String mLastUpdateTime;
     private MarkerOptions markerOptions;
     private Task<LocationSettingsResponse> result;
     private boolean canGetLocation = false;
-    private Activity activity;
-    private Dialog dialog;
     private AlertDialog locationDialog;
 
     public LocationTracker(Context context) {

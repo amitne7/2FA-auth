@@ -1,13 +1,15 @@
 package auth.android.app.ui.activity;
 
+
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import auth.android.app.utils.Constants;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import auth.android.app.R;
 import auth.android.app.utils.PrefsUtil;
-import event.msvc.android.R;
 
 public class SplashActivity extends AppCompatActivity {
     //Set splash screen time duration
@@ -18,19 +20,18 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         final PrefsUtil prefsUtil = new PrefsUtil(this);
-        prefsUtil.saveString(Constants.PREF_EMAIL, "hello@mail.com");
+        try {
+            FirebaseMessaging.getInstance().subscribeToTopic("authApp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (prefsUtil.getBoolean(Constants.IS_LOGGED_IN)) {
-                    Intent mIntent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(mIntent);
-                    finish();
-                } else {
-                    Intent rIntent = new Intent(SplashActivity.this, AccountListActivity.class);
-                    startActivity(rIntent);
-                    finish();
-                }
+                Intent rIntent = new Intent(SplashActivity.this, AccountListActivity.class);
+                startActivity(rIntent);
+                finish();
             }
         }, SPLASH_TIME);
     }

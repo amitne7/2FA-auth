@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import auth.android.app.R;
 import auth.android.app.responsemodel.account.AccountData;
 import auth.android.app.utils.Constants;
 import auth.android.app.utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import event.msvc.android.R;
 
 public class AccountListAdapter extends BaseAdapter {
     private Context context;
@@ -69,7 +69,7 @@ public class AccountListAdapter extends BaseAdapter {
         public AccountViewHolder(View view) {
             ButterKnife.bind(this, view);
             tvInitials.setTypeface(Utils.getFont(context, Constants.BOLD));
-            tvName.setTypeface(Utils.getFont(context, Constants.REGULAR));
+            tvName.setTypeface(Utils.getFont(context, Constants.BOLD));
             tvEmail.setTypeface(Utils.getFont(context, Constants.REGULAR));
         }
     }

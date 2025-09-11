@@ -7,10 +7,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by sudhirharit on 28/03/18.
- */
-
 public class ApiClient {
 
     private static Retrofit retrofit = null;
@@ -27,7 +23,7 @@ public class ApiClient {
         httpClient.readTimeout(60, TimeUnit.SECONDS);
         httpClient.writeTimeout(60, TimeUnit.SECONDS);
 
-        httpClient.addInterceptor(logging);  // <-- this is the important line!
+        httpClient.addInterceptor(logging);
 
 
         retrofit = new Retrofit.Builder()

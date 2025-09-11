@@ -6,10 +6,10 @@ public class AccountData {
     @SerializedName("id")
     private int id;
 
-    @SerializedName("name")
+    @SerializedName("account_name")
     private String name;
 
-    @SerializedName("email")
+    @SerializedName("account_key")
     private String email;
 
     public int getId() {

@@ -1,17 +1,16 @@
 package auth.android.app.core.common;
-
-import auth.android.app.request.common.PageDataRequest;
-import auth.android.app.responsemodel.common.PageDataResponse;
+import auth.android.app.request.FcmTokenRequest;
+import auth.android.app.responsemodel.GeneralResponse;
 
 public interface CommonContractor {
     interface View {
-        void onPageResponse(PageDataResponse response);
+        void updateFcmTokenResponse(GeneralResponse response);
     }
     interface Presenter {
-        void onPageResponse(PageDataResponse response);
-        void pageRequest(PageDataRequest request);
+        void updateFcmTokenResponse(GeneralResponse response);
+        void fcmRequest(FcmTokenRequest request);
     }
     interface Interactor {
-        void pageRequest(PageDataRequest request);
+        void fcmRequest(FcmTokenRequest request);
     }
 }

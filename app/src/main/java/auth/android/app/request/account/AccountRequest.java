@@ -1,9 +1,8 @@
 package auth.android.app.request.account;
-
 public class AccountRequest {
-    private String email;
+    private String deviceId;
 
-    public AccountRequest(String email) {
-        this.email = email;
+    public AccountRequest(String deviceId) {
+        this.deviceId = deviceId;
     }
 }

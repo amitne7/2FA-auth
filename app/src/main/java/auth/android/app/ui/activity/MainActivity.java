@@ -3,7 +3,7 @@ package auth.android.app.ui.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import event.msvc.android.R;
+import auth.android.app.R;
 
 public class MainActivity extends AppCompatActivity {
 
