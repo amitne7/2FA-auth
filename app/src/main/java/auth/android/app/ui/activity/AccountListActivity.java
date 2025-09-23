@@ -45,24 +45,12 @@ import auth.android.app.utils.Constants;
 import auth.android.app.utils.NotificationReceiver;
 import auth.android.app.utils.PrefsUtil;
 import auth.android.app.utils.Utils;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AccountListActivity extends AppCompatActivity implements AccountContractor.View, CommonContractor.View {
 
-    @BindView(R.id.toolbar_title)
     TextView tvTitle;
-
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    /*@BindView(R.id.iv_add_account)
-    ImageView ivAdd;*/
-
-    @BindView(R.id.lv_accounts)
     ListView lvAccount;
-
-    @BindView(R.id.tv_error)
     TextView tvError;
 
     private List<AccountData> accountDataList;
@@ -77,7 +65,7 @@ public class AccountListActivity extends AppCompatActivity implements AccountCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_list);
-        ButterKnife.bind(this);
+        initViews();
         prefsUtil = new PrefsUtil(this);
         accountPresenter = new AccountPresenter(this);
         commonPresenter = new CommonPresenter(this);
@@ -95,6 +83,13 @@ public class AccountListActivity extends AppCompatActivity implements AccountCon
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             getPermission();
 
+    }
+
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        tvTitle = findViewById(R.id.toolbar_title);
+        lvAccount = findViewById(R.id.lv_accounts);
+        tvError = findViewById(R.id.tv_error);
     }
 
     @Override
@@ -145,18 +140,8 @@ public class AccountListActivity extends AppCompatActivity implements AccountCon
         tv2.setTypeface(getFont(this, Constants.REGULAR));
         ok.setTypeface(getFont(this, Constants.REGULAR));
         tv2.setText(accessCode);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        ok.setOnClickListener(view1 -> dialog.dismiss());
+        cancel.setOnClickListener(view2 -> dialog.dismiss());
         builder.setView(view);
         dialog = builder.create();
         dialog.show();
@@ -169,27 +154,17 @@ public class AccountListActivity extends AppCompatActivity implements AccountCon
         alertDialogBuilder.setMessage("Please change the Permission of Location to \"Allow all the time\" to fully utilize the application.");
         alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
+                (arg0, arg1) -> {
+                    Intent i = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    i.addCategory(Intent.CATEGORY_DEFAULT);
+                    i.setData(Uri.parse("package:" + getPackageName()));
+                    startActivity(i);
+                    arg0.dismiss();
 
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Intent i = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        i.addCategory(Intent.CATEGORY_DEFAULT);
-                        i.setData(Uri.parse("package:" + getPackageName()));
-                        startActivity(i);
-                        arg0.dismiss();
-
-                    }
                 });
 
         alertDialogBuilder.setNegativeButton("cancel",
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        arg0.dismiss();
-                    }
-                });
+                (arg0, arg1) -> arg0.dismiss());
 
         android.app.AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();

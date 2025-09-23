@@ -13,8 +13,6 @@ import auth.android.app.R;
 import auth.android.app.responsemodel.account.AccountData;
 import auth.android.app.utils.Constants;
 import auth.android.app.utils.Utils;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AccountListAdapter extends BaseAdapter {
     private Context context;
@@ -57,17 +55,14 @@ public class AccountListAdapter extends BaseAdapter {
     }
 
     public class AccountViewHolder {
-        @BindView(R.id.tv_initials)
         TextView tvInitials;
-
-        @BindView(R.id.tv_name)
         TextView tvName;
-
-        @BindView(R.id.tv_email)
         TextView tvEmail;
 
         public AccountViewHolder(View view) {
-            ButterKnife.bind(this, view);
+            tvInitials = view.findViewById(R.id.tv_initials);
+            tvName = view.findViewById(R.id.tv_name);
+            tvEmail = view.findViewById(R.id.tv_email);
             tvInitials.setTypeface(Utils.getFont(context, Constants.BOLD));
             tvName.setTypeface(Utils.getFont(context, Constants.BOLD));
             tvEmail.setTypeface(Utils.getFont(context, Constants.REGULAR));

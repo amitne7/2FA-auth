@@ -19,19 +19,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import auth.android.app.R;
 
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
-    @BindView(R.id.sv_location)
     SearchView searchView;
 
-    @BindView(R.id.btn_select_location)
     Button btnSelectLocation;
-
     private GoogleMap mMap;
     private Marker marker;
     private LatLng latLng;
@@ -40,7 +34,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        ButterKnife.bind(this);
+        initViews();
         // Obtain the SupportMapFragment and get notified
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -55,7 +49,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 List<Address> addressList = null;
 
 
-                if (location != null || location.equals("")) {
+                if (location != null || !location.isEmpty()) {
 
                     Geocoder geocoder = new Geocoder(MapActivity.this);
                     try {
@@ -93,6 +87,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
     }
 
+    private void initViews() {
+        searchView = findViewById(R.id.sv_location);
+        btnSelectLocation = findViewById(R.id.btn_select_location);
+        btnSelectLocation.setOnClickListener(view -> onClickLocationBtn());
+    }
+
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
@@ -110,8 +110,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
     }
 
-    @OnClick(R.id.btn_select_location)
-    void onClickLocationBtn() {
+    private void onClickLocationBtn() {
         Intent intent=new Intent();
         intent.putExtra("lat",String.valueOf(latLng.latitude));
         intent.putExtra("lng",String.valueOf(latLng.longitude));

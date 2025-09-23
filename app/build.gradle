@@ -44,11 +44,6 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.OKHTTP_INTERCEPTOR"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.GSON_CONVERTER"
 
-    //Butterknife
-
-    implementation "com.jakewharton:butterknife:$rootProject.BUTTERKNIFE_VERSION"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.BUTTERKNIFE_VERSION"
-
     //Google services
 
     implementation "com.google.android.gms:play-services-maps:$rootProject.GOOGLE_SERVICES"
@@ -62,7 +57,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     implementation 'org.jsoup:jsoup:1.8.3'
-    implementation 'com.google.protobuf:protobuf-java:3.21.12'
 
     //Screen size
     implementation 'com.intuit.sdp:sdp-android:1.0.5'

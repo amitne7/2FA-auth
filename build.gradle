@@ -31,7 +31,6 @@ task clean(type: Delete) {
 
 ext {
     CIRCLEINDICATOR_VERSION = '1.2.2@aar'
-    BUTTERKNIFE_VERSION = '8.5.1'
     RETROFIT_VERSION = '2.4.0'
     OKHTTP_INTERCEPTOR = '3.8.0'
     GSON_CONVERTER ='2.1.0'

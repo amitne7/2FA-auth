@@ -3,12 +3,9 @@ package auth.android.app.ui.activity;
 import static auth.android.app.utils.Utils.getFont;
 import static auth.android.app.utils.Utils.showMessageOnMainThread;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -23,36 +20,18 @@ import auth.android.app.responsemodel.GeneralResponse;
 import auth.android.app.responsemodel.account.AccountResponse;
 import auth.android.app.utils.Constants;
 import auth.android.app.utils.PrefsUtil;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AddAccountActivity extends BaseActivity implements AccountContractor.View {
-    @BindView(R.id.toolbar)
+
     Toolbar toolbar;
-
-    @BindView(R.id.et_email)
     EditText etEmail;
-
-   @BindView(R.id.et_account_name)
-   EditText etAccountName;
-
-    @BindView(R.id.et_location)
+    EditText etAccountName;
     EditText etLocation;
-
-    @BindView(R.id.et_location_name)
     EditText etLocationName;
-
-    @BindView(R.id.btn_submit_account)
     Button btnRegister;
-
-    @BindView(R.id.progress_background)
     RelativeLayout progressBar;
 
     private static final int REQUEST_SELECT_LOCATION = 1003;
-    private PrefsUtil prefsUtil;
-    private String lat;
-    private String lng;
     private AccountPresenter accountPresenter;
     private String deviceId;
 
@@ -60,17 +39,21 @@ public class AddAccountActivity extends BaseActivity implements AccountContracto
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
-        ButterKnife.bind(this);
-        prefsUtil = new PrefsUtil(this);
+        initViews();
+        PrefsUtil prefsUtil = new PrefsUtil(this);
         accountPresenter = new AccountPresenter(this);
         deviceId = prefsUtil.getString(Constants.PREF_DEVICE_ID);
-        iniViews();
-
     }
 
+    private void initViews() {
+        toolbar = findViewById(R.id.toolbar);
+        etEmail = findViewById(R.id.et_email);
+        etLocation = findViewById(R.id.et_location);
+        etAccountName = findViewById(R.id.et_account_name);
+        etLocationName = findViewById(R.id.et_location_name);
+        btnRegister = findViewById(R.id.btn_submit_account);
+        progressBar = findViewById(R.id.progress_background);
 
-
-    private void iniViews() {
         toolbar.setTitle(getString(R.string.txt_add_account));
         btnRegister.setTypeface(getFont(this, Constants.BOLD));
         etLocation.setTypeface(getFont(this, Constants.REGULAR));
@@ -78,19 +61,12 @@ public class AddAccountActivity extends BaseActivity implements AccountContracto
         etLocation.setTypeface(getFont(this, Constants.REGULAR));
         etLocationName.setTypeface(getFont(this, Constants.REGULAR));
         etAccountName.setTypeface(getFont(this, Constants.REGULAR));
-
+        etLocation.setOnClickListener(view -> startActivityForResult(new Intent(AddAccountActivity.this, MapActivity.class), REQUEST_SELECT_LOCATION));
+        btnRegister.setOnClickListener(view -> submitAccountDetails());
     }
 
 
-    @OnClick(R.id.et_location)
-    void onClickLocation() {
-        startActivityForResult(new Intent(this, MapActivity.class), REQUEST_SELECT_LOCATION);
-    }
-
-
-
-    @OnClick(R.id.btn_submit_account)
-    void onClickAddAccount() {
+    private void submitAccountDetails() {
         String accountName = etAccountName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String location = etLocation.getText().toString().trim();
@@ -101,7 +77,6 @@ public class AddAccountActivity extends BaseActivity implements AccountContracto
             RegisterRequest request = new RegisterRequest(deviceId, accountName, email, lat, lng, locationName);
             accountPresenter.addAccountRequest(request);
         }
-
     }
 
     private boolean validate(String accountName, String email, String location, String locationName) {
@@ -129,8 +104,12 @@ public class AddAccountActivity extends BaseActivity implements AccountContracto
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_SELECT_LOCATION && resultCode == RESULT_OK) {
-            lat = data.getStringExtra("lat");
-            lng = data.getStringExtra("lng");
+            String lat = null;
+            String lng = null;
+            if (data != null) {
+                lat = data.getStringExtra("lat");
+                lng = data.getStringExtra("lng");
+            }
             etLocation.setText(lat + ", " + lng);
         }
     }
@@ -140,16 +119,6 @@ public class AddAccountActivity extends BaseActivity implements AccountContracto
     public void onBackPressed() {
         finish();
     }
-
-    private void getPermission() {
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-
-        }
-
-    }
-
     @Override
     public void addAccountResponse(GeneralResponse response) {
         if (null != response) {

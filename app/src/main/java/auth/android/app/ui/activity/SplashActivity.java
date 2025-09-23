@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import auth.android.app.R;
-import auth.android.app.utils.PrefsUtil;
 
 public class SplashActivity extends AppCompatActivity {
     //Set splash screen time duration
@@ -19,20 +18,16 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        final PrefsUtil prefsUtil = new PrefsUtil(this);
         try {
             FirebaseMessaging.getInstance().subscribeToTopic("authApp");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent rIntent = new Intent(SplashActivity.this, AccountListActivity.class);
-                startActivity(rIntent);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent rIntent = new Intent(SplashActivity.this, AccountListActivity.class);
+            startActivity(rIntent);
+            finish();
         }, SPLASH_TIME);
     }
 }
