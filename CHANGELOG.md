@@ -16,5 +16,14 @@
 - Update app functionality
 - Remove Butterknife dependency
 
+---
+
+## [v0.0.1] - 2025‑09‑23
+
+### Added
+- CHANGELOG.
+- LICENCE
+- Signed APK
+- SHA256 Checksum  
 
 ---
