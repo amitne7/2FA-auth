@@ -1,3 +1,11 @@
+**Timeline:** 06 May 2024 - 13 Sep 2024   
+**Role:** Android Mobile App Developer    
+**Type of Project:** Android Mobile App for 2FA (Academic Project)   
+**Location:** Huddersfield(UK)   
+**Outcome:** Learn and about existing Authentication, Authorization technologies and proposed new methodology for 2FA
+
+---
+
 # 2FA-auth
 Mobile Application for Two Factor Authentication(2FA) with geo location
 
@@ -116,5 +124,25 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 # 5. Run instrumentation tests on emulator/real device
 ./gradlew connectedAndroidTest
 ```
+
+---
+
+# Evidence
+**Screenshots**
+- ![App Screenshot](assets/screenshot/add_account.png) - Add account
+- ![App Screenshot](assets/screenshot/select_location.png) - Select Location to add as trusted location
+- ![App Screenshot](assets/screenshot/account_list.png) - List of added accounts
+- ![App Screenshot](assets/screenshot/access_code_notification.png) - Firebase push notification for access code
+- ![App Screenshot](assets/screenshot/access_code.png) - Get access code form notification
+
+**Workflow Diagram**
+- ![App Screenshot](assets/diagram/app_workflow.png) - App workflow for first factor and second factor using mobile application
+- ![App Screenshot](assets/diagram/add_account_work_flow.png) - Add account workflow for mobile application
+
+---
+
+# Timeline
+**Progress log week wise**
+- [Download progress log](PROGRESSLOG.md)
 
 
