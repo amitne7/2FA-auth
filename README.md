@@ -65,7 +65,9 @@ This project proposes a **location-aware mobile 2FA application** that verifies 
    - Select **File > Open**  
    - Navigate to the cloned repository folder and select it.  
 
-3. Let Android Studio **sync Gradle** and download all dependencies.  
+3. Let Android Studio **sync Gradle** and download all dependencies.
+4. [Backend Project](https://github.com/amitne7/2fa-auth-api) setup for backend API and follow [Quick Start](https://github.com/amitne7/2fa-auth-api?tab=readme-ov-file#quick-start)
+5. Open `utils/Constants.java` in android project and update BASE_URL `public static final String BASE_URL = "YOUR_BACKEND_HOST_DOMAIN";`
 
   ## Running on Emulator
 
@@ -143,6 +145,6 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 # Timeline
 **Progress log week wise**
-- [Download progress log](PROGRESSLOG.md)
+- [Progress log](PROGRESSLOG.md)
 
 
